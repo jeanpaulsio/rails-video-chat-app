@@ -7,7 +7,7 @@ class RoomFlowTest < ActionDispatch::IntegrationTest
     assert_select 'input#room_name'
   end
 
-  test 'can create a room' do
+  test 'can create a room as a guest' do
     get root_url
 
     assert_difference 'Room.count', 1 do
@@ -16,5 +16,9 @@ class RoomFlowTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_template 'rooms/show'
+  end
+
+  test 'can create a room as a member' do
+    skip 'not yet implemented'
   end
 end

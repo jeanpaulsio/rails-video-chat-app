@@ -1,11 +1,14 @@
 temporary_room:
   name: Temporary Room
   status: 0
+  user: jerry
 
 unrestricted_room:
   name: Unrestricted Room
   status: 1
+  user: jerry
 
 restricted_room:
   name: Restricted Room
   status: 2
+  user: kramer

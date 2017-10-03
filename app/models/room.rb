@@ -1,5 +1,7 @@
-# Holds Video Conference
+# :nodoc:
 class Room < ApplicationRecord
+  belongs_to :user, optional: true
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 

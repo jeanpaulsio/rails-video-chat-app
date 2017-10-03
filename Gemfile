@@ -5,15 +5,22 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# rails
+gem 'rails',        '~> 5.1.4'
+
 gem 'coffee-rails', '~> 4.2'
 gem 'friendly_id',  '~> 5.2', '>= 5.2.3'
 gem 'jbuilder',     '~> 2.5'
 gem 'pg',           '~> 0.18'
 gem 'puma',         '~> 3.7'
-gem 'rails',        '~> 5.1.4'
 gem 'sass-rails',   '~> 5.0'
 gem 'turbolinks',   '~> 5'
 gem 'uglifier',     '>= 1.3.0'
+
+# authentication
+gem 'devise',            '~> 4.3'
+gem 'devise_token_auth', '~> 0.1.42'
+gem 'omniauth',          '~> 1.7'
 
 group :test do
   gem 'guard',                    '~> 2.14', '>= 2.14.1'

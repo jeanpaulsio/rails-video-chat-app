@@ -28,13 +28,19 @@ ___
 * Room
   - belongs_to user
   - has_many messages
-  - status: 0 (temporary), 1 (public), 2 (private)
+  - id: `integer`
   - status: `integer`
   - name: `string`
-  - contains ICE creds
+  - user_id: `reference`
 * Message
   - belongs_to room
   - belongs_to user
+  - id: `integer`
+  - content: `text`
+  - user_id: `reference`
+  - room_id: `reference`
 * User
   - has_many messages
-  - has_one room
+  - has_many rooms
+  - id: `integer`
+  - email: `string`
