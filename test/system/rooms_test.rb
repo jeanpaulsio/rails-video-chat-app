@@ -6,6 +6,6 @@ class RoomsTest < ApplicationSystemTestCase
 
     fill_in 'Name', with: 'Room Name'
     click_on 'Create Room'
-    assert_text "Room#show"
+    assert_text "You created the room"
   end
 end
