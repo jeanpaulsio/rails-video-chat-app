@@ -16,6 +16,11 @@ class RoomTest < ActiveSupport::TestCase
     assert_not @temporary_room.valid?
   end
 
+  test 'should not save a room that already exists' do
+    room = Room.new(name: 'Temporary Room')
+    assert_not room.valid?
+  end
+
   test 'should not save a status higher than 2' do
     assert_raises(ArgumentError) do
       @temporary_room.status = 3

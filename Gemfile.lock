@@ -68,6 +68,8 @@ GEM
     execjs (2.7.0)
     ffi (1.9.18)
     formatador (0.2.5)
+    friendly_id (5.2.3)
+      activerecord (>= 4.0.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     guard (2.14.1)
@@ -215,6 +217,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  friendly_id (~> 5.2, >= 5.2.3)
   guard (~> 2.14, >= 2.14.1)
   guard-minitest (~> 2.4, >= 2.4.6)
   jbuilder (~> 2.5)
