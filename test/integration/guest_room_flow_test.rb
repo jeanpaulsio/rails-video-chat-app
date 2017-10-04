@@ -35,6 +35,6 @@ class GuestRoomFlowTest < ActionDispatch::IntegrationTest
 
     get claim_room_path
     follow_redirect!
-    assert_select 'div.alert-notice', 'Room claimed'
+    assert_select 'div.alert-success', 'Room claimed'
   end
 end

@@ -21,6 +21,12 @@ class RoomsController < ApplicationController
   def show; end
 
   def toggle_status
+    unless @room.user == current_user
+      flash[:notice] = 'You must own this room to do that!'
+      redirect_to @room
+      return
+    end
+
     @room.status = params[:status]
     @room.save
     flash[:notice] = 'Room status updated'
@@ -28,10 +34,16 @@ class RoomsController < ApplicationController
   end
 
   def claim
+    if @room.user
+      flash[:notice] = 'Room has been taken'
+      redirect_to @room
+      return
+    end
+
     @room.user   = current_user
     @room.status = 'unrestricted'
     @room.save
-    flash[:notice] = 'Room claimed'
+    flash[:success] = 'Room claimed'
     redirect_to @room
   end
 
