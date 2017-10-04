@@ -1,11 +1,15 @@
 <h1>Room#show</h1>
-<!-- <%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %> -->
+<%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
 
-<!-- <p><%= "Register Now To Claim Room" unless current_user %></p> -->
+<hr>
 
-<!-- only show this to a registered user -->
-<%= link_to "make temporary", toggle_status_room_path(@room, status: :temporary) %>
 <%= link_to "make unrestricted", toggle_status_room_path(@room, status: :unrestricted) %>
 <%= link_to "make restricted", toggle_status_room_path(@room, status: :restricted) %>
+
+<hr>
+
+<%= link_to "claim room", claim_room_path(@room) %>
+
+<hr>
 
 <%= @room.inspect %>

@@ -1,6 +1,7 @@
 # :nodoc:
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show edit update destroy toggle_status]
+  before_action :set_room, only: %i[show edit update destroy
+                                    toggle_status claim]
 
   def index
     @rooms = Room.all
@@ -23,6 +24,13 @@ class RoomsController < ApplicationController
     @room.status = params[:status]
     @room.save
     flash[:notice] = 'Room status updated'
+    redirect_to @room
+  end
+
+  def claim
+    @room.user = current_user
+    @room.save
+    flash[:notice] = 'Room claimed'
     redirect_to @room
   end
 

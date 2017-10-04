@@ -5,18 +5,16 @@ Rails.application.routes.draw do
   resources :rooms do
     member do
       get :toggle_status
+      get :claim
     end
   end
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   # API Routes
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
-      mount_devise_token_auth_for 'User', at: 'auth',
-                                          controllers: {
-                                            registrations: 'users/registrations'
-                                          }
+      mount_devise_token_auth_for 'User', at: 'auth'
     end
   end
 end
