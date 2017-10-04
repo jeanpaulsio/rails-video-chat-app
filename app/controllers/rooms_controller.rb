@@ -2,6 +2,10 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show edit update destroy]
 
+  def index
+    @rooms = current_user.rooms
+  end
+
   def create
     @room = Room.new(room_params)
     if @room.save

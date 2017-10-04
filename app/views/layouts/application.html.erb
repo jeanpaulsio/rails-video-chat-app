@@ -9,6 +9,17 @@
   </head>
 
   <body>
+    <!-- Login Links -->
+    <%= link_to "Home", root_path %>
+    <% if user_signed_in? %>
+      <%= link_to "My Rooms", rooms_path %>
+      <%= link_to "Account", edit_user_registration_path %>
+      <%= link_to "Log Out #{current_user.email}", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Register", new_user_registration_path %>
+      <%= link_to "Sign In", new_user_session_path %>
+    <% end %>
+
     <%= render 'shared/flash_alerts' %>
     <%= yield %>
   </body>

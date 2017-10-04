@@ -4,7 +4,6 @@ require 'test_helper'
 class RoomTest < ActiveSupport::TestCase
   def setup
     @temporary_room = rooms(:temporary_room)
-    @user           = users(:jerry)
   end
 
   test 'should not save a room without a name' do
@@ -35,7 +34,7 @@ class RoomTest < ActiveSupport::TestCase
   end
 
   test 'should create a room with a default status of 0' do
-    room = Room.create!(name: 'Room', user_id: @user.id)
+    room = Room.create!(name: 'Room')
     assert_equal room.status, 'temporary'
   end
 end
