@@ -28,7 +28,8 @@ class RoomsController < ApplicationController
   end
 
   def claim
-    @room.user = current_user
+    @room.user   = current_user
+    @room.status = 'unrestricted'
     @room.save
     flash[:notice] = 'Room claimed'
     redirect_to @room

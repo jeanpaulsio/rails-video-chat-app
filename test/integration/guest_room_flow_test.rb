@@ -19,16 +19,22 @@ class GuestRoomFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'can claim a room by registering' do
-    skip 'not yet implemented'
     get root_url
 
     assert_difference 'Room.count', 1 do
-      post rooms_path, params: { room: { name: 'room' } }
+      post rooms_path, params: { room: { name: 'my room' } }
     end
 
     follow_redirect!
     assert_template 'rooms/show'
+    assert_select 'h1', 'my room'
 
-    assert_select 'h1', 'Room#show'
+    sign_up_as(email: 'jerry@rails.com')
+    follow_redirect!
+    assert_select 'h1', 'my room'
+
+    get claim_room_path
+    follow_redirect!
+    assert_select 'div.alert-notice', 'Room claimed'
   end
 end

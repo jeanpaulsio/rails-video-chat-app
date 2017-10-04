@@ -1,4 +1,4 @@
-<h1>Room#show</h1>
+<h1><%= @room.name %></h1>
 <%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
 
 <hr>
@@ -8,7 +8,7 @@
 
 <hr>
 
-<%= link_to "claim room", claim_room_path(@room) %>
+<%= link_to "claim room", claim_room_path %>
 
 <hr>
 
