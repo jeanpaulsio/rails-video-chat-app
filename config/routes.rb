@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   # Web Routes
   root 'pages#home'
-  resources :rooms
+
+  resources :rooms do
+    member do
+      get :toggle_status
+    end
+  end
+
   devise_for :users
 
   # API Routes

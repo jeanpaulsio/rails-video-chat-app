@@ -1,9 +1,9 @@
 # :nodoc:
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show edit update destroy]
+  before_action :set_room, only: %i[show edit update destroy toggle_status]
 
   def index
-    @rooms = current_user.rooms
+    @rooms = Room.all
   end
 
   def create
@@ -18,6 +18,13 @@ class RoomsController < ApplicationController
   end
 
   def show; end
+
+  def toggle_status
+    @room.status = params[:status]
+    @room.save
+    flash[:notice] = 'Room status updated'
+    redirect_to @room
+  end
 
   private
 
