@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://redistogo:b9b18e3300ef1878746a63a0b4b3bdc2@tarpon.redistogo.com:11990/
   channel_prefix: video-chat-app_production
