@@ -1,5 +1,9 @@
 # Rails Video Chat App
 
+## TODO
+
+* Create system tests
+
 ## As a user, I can...
 
 * create a room on the fly
@@ -17,7 +21,7 @@
 ## As a member, I can...
 
 * Claim a room name
-* Password protect my room
+* Password protect my room - some kind of authorization
 * upload a brand "logo" to customize
 * change page background color
 
@@ -32,6 +36,11 @@ ___
   - status: `integer`
   - name: `string`
   - user_id: `reference`
+* User
+  - has_many messages
+  - has_many rooms
+  - id: `integer`
+  - email: `string`
 * Message
   - belongs_to room
   - belongs_to user
@@ -39,8 +48,3 @@ ___
   - content: `text`
   - user_id: `reference`
   - room_id: `reference`
-* User
-  - has_many messages
-  - has_many rooms
-  - id: `integer`
-  - email: `string`
