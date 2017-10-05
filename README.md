@@ -4,6 +4,10 @@
 
 * Create system tests
 
+___
+
+# User Stories
+
 ## As a user, I can...
 
 * create a room on the fly
@@ -41,3 +45,7 @@ ___
   - has_many rooms
   - id: `integer`
   - email: `string`
+
+# Channels
+
+* Session

@@ -9,7 +9,10 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/sessions', to: 'sessions#create'
   devise_for :users, controllers: { registrations: 'users/registrations' }
+
+  mount ActionCable.server, at: '/cable'
 
   # API Routes
   namespace :api, constraints: { format: 'json' } do

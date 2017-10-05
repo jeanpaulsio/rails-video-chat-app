@@ -13,3 +13,14 @@
 <hr>
 
 <%= @room.inspect %>
+
+<button onclick="handleJoinSession();">Join Session</button>
+
+<span id="room-name" data-room='<%= @room.slug %>'>
+</span>
+
+<% content_for :page_js do %>
+  <script type="text/javascript">
+    <%= render file: "#{Rails.root}/app/views/rooms/js/webrtc.js" %>
+  </script>
+<% end %>
