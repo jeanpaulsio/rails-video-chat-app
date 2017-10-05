@@ -13,9 +13,8 @@ ___
 * create a room on the fly
 * Send links to a room
 * Enter into an existing room
-* Mute my microphone
+* [Mute my microphone](https://stackoverflow.com/questions/35512314/how-to-mute-unmute-mic-in-webrtc)
 * Turn my video off
-* send chat messages to the room
 
 ## As a guest, I can...
 

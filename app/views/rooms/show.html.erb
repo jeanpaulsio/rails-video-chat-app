@@ -23,7 +23,7 @@
 
 
 <div>User's ID
-  <span id="currentUser" class="badge badge-primary"><%= @user_id %></span>
+  <span id="currentUser" class="badge badge-primary"><%= @user.id unless @user.nil? %></span>
 </div>
 
 <div id="remoteViewContainer"></div>

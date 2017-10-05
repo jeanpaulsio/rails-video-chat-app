@@ -29,7 +29,7 @@ class RoomsController < ApplicationController
   def show
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
     @json_response = response.to_json
-    @user_id       = current_user.id
+    @user          = current_user || nil
   end
 
   def toggle_status
