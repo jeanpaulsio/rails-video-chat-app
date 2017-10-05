@@ -7,6 +7,10 @@ class RoomsController < ApplicationController
     @rooms = Room.all
   end
 
+  def new
+    @room = Room.new
+  end
+
   def create
     @room = Room.new(room_params)
     if @room.save
@@ -54,6 +58,6 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:name)
+    params.require(:room).permit(:name, :user_id)
   end
 end
