@@ -38,7 +38,7 @@ class RoomTest < ActiveSupport::TestCase
     assert_equal room.status, 'temporary'
   end
 
-  test 'should create an unrestricted room for users' do
+  test '#update_status should create an unrestricted room for users' do
     user = users(:jerry)
     room = user.rooms.create!(name: 'asdfasdf')
     assert_equal room.status, 'unrestricted'

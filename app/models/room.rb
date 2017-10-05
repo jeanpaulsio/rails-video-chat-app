@@ -17,8 +17,6 @@ class Room < ApplicationRecord
 
   after_create :update_status
 
-  private
-
   def update_status
     return if user_id.nil?
 
