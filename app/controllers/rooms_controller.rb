@@ -3,11 +3,13 @@ require 'json'
 
 # :nodoc:
 class RoomsController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
+  before_action :set_user
   before_action :set_room, only: %i[show edit update destroy
                                     toggle_status claim]
 
   def index
-    @rooms = current_user.rooms
+    @rooms = @user.rooms unless @user.nil?
     @all_rooms = Room.all
   end
 
@@ -39,6 +41,12 @@ class RoomsController < ApplicationController
       return
     end
 
+    if current_user.nil?
+      flash[:notice] = 'You must own this room to do that!'
+      redirect_to @room
+      return
+    end
+
     @room.status = params[:status]
     @room.save
     flash[:notice] = 'Room status updated'
@@ -52,6 +60,12 @@ class RoomsController < ApplicationController
       return
     end
 
+    if current_user.nil?
+      flash[:notice] = 'You must register to claim this room!'
+      redirect_to @room
+      return
+    end
+
     @room.user   = current_user
     @room.status = 'unrestricted'
     @room.save
@@ -60,6 +74,10 @@ class RoomsController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def set_room
     @room = Room.friendly.find(params[:id])
