@@ -1,10 +1,14 @@
+require 'rest-client'
+require 'json'
+
 # :nodoc:
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show edit update destroy
                                     toggle_status claim]
 
   def index
-    @rooms = Room.all
+    @rooms = current_user.rooms
+    @all_rooms = Room.all
   end
 
   def new
@@ -22,7 +26,11 @@ class RoomsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
+    @json_response = response.to_json
+    @user_id       = current_user.id
+  end
 
   def toggle_status
     unless @room.user == current_user
