@@ -12,7 +12,7 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_template 'rooms/show'
-    assert_select 'div.alert-success', 'You created the room: my room!'
+    assert_select 'div.alert-success'
     assert_select 'h1', 'my room'
   end
 

@@ -20,7 +20,8 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      flash[:success] = "You created the room: #{@room.name}!"
+      flash[:success] = 'Invite by sharing this link: ' \
+                        "#{request.original_url}/#{@room.slug}"
       redirect_to @room
     else
       flash[:notice] = 'Sorry, that room is taken!'
@@ -34,13 +35,7 @@ class RoomsController < ApplicationController
   end
 
   def toggle_status
-    unless @room.user == current_user
-      flash[:notice] = 'You must own this room to do that!'
-      redirect_to @room
-      return
-    end
-
-    if current_user.nil?
+    if current_user.nil? || @room.user != current_user
       flash[:notice] = 'You must own this room to do that!'
       redirect_to @room
       return
