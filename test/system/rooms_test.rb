@@ -7,7 +7,7 @@ class RoomsTest < ApplicationSystemTestCase
 
     fill_in 'Name', with: 'Room 1'
     click_on 'Create Room'
-    assert_text 'You created the room'
+    assert_text 'Invite by sharing this link:'
   end
 
   # this needs to be more robust
@@ -16,7 +16,7 @@ class RoomsTest < ApplicationSystemTestCase
 
     fill_in 'Name', with: 'Room 2'
     click_on 'Create Room'
-    assert_text 'You created the room'
+    assert_text 'Invite by sharing this link:'
 
     click_on 'Register'
     fill_in 'Email', with: 'jerry@rails.com'
