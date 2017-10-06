@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   before_action :store_user_location!, if: :storable_location?
+  include CurrentUserConcern
 
   def storable_location?
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?

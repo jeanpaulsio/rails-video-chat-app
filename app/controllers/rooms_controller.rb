@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
                                     toggle_status claim]
 
   def index
-    @rooms = @user.rooms unless @user.nil?
+    @rooms = @user.rooms
     @all_rooms = Room.all
   end
 
@@ -35,7 +35,7 @@ class RoomsController < ApplicationController
   end
 
   def toggle_status
-    if current_user.nil? || @room.user != current_user
+    if (@user.is_a? GuestUser) || (@room.user != @user)
       flash[:notice] = 'You must own this room to do that!'
       redirect_to @room
       return
@@ -54,7 +54,7 @@ class RoomsController < ApplicationController
       return
     end
 
-    if current_user.nil?
+    if @user.is_a? GuestUser
       flash[:notice] = 'You must register to claim this room!'
       redirect_to @room
       return
@@ -70,7 +70,7 @@ class RoomsController < ApplicationController
   private
 
   def set_user
-    @user = current_user || nil
+    @user = current_user
   end
 
   def set_room

@@ -7,6 +7,8 @@
 - [ ] Front End UI
 - [ ] Create system tests
 - [ ] Test coverage for WebRTC JS stuff
+- [ ] Add Concept of a 'Guest User'
+- [ ] WebRTC Support across different browsers
 
 ## As a user, I can...
 

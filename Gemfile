@@ -8,6 +8,7 @@ end
 # rails
 gem 'rails',        '~> 5.1.4'
 
+gem 'bcrypt',       '~> 3.1', '>= 3.1.11'
 gem 'coffee-rails', '~> 4.2'
 gem 'figaro',       '~> 1.1', '>= 1.1.1'
 gem 'friendly_id',  '~> 5.2', '>= 5.2.3'

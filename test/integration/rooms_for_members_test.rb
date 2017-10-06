@@ -9,7 +9,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
     log_in_as(@jerry)
   end
 
-  test 'cannot claim someone else\'s room' do
+  test 'cannot claim another user\'s room' do
     get room_path(@kramers_room)
 
     assert_template 'rooms/show'
@@ -20,7 +20,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
     assert_select 'div.alert-notice', 'Room has been taken'
   end
 
-  test 'can toggle room status' do
+  test 'cannot toggle room status of another user\'s room' do
     get room_path(@kramers_room)
 
     assert_template 'rooms/show'
