@@ -1,5 +1,7 @@
 # Rails Video Chat App
 
+![WebRTC on Rails](https://cdn-images-1.medium.com/max/2000/1*pwyh-wJ4clwB3s4eOXHjqw.jpeg)
+
 [https://webrtc-on-rails.herokuapp.com](https://webrtc-on-rails.herokuapp.com)
 
 # TODO
