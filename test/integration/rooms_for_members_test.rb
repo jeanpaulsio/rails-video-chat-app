@@ -1,7 +1,7 @@
 require 'test_helper'
 
 # :nodoc:
-class RoomsForUsersTest < ActionDispatch::IntegrationTest
+class RoomsForMembersTest < ActionDispatch::IntegrationTest
   def setup
     kramers_room = rooms(:restricted_room)
     jerry        = users(:jerry)

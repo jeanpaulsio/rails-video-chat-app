@@ -10,7 +10,17 @@ Rails.application.routes.draw do
   end
 
   post '/sessions', to: 'sessions#create'
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, skip: :registrations
+  devise_scope :user do
+    resource :registration,
+      only: %i[new create edit update],
+      path: 'users',
+      path_names: { new: 'sign_up' },
+      controller: 'devise/registrations',
+      as: :user_registration do
+        get :cancel
+      end
+  end
 
   mount ActionCable.server, at: '/cable'
 

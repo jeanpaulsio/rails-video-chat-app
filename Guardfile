@@ -6,13 +6,13 @@ guard :minitest, spring: 'bin/rails test', all_on_start: false do
     "test/models/#{matches[1]}_test.rb"
   end
 
-  # Watches views/rooms and runs integration tests
-  watch(%r{app/views/rooms/*}) do
+  # Runs all integration tests when a view is changed
+  watch(%r{app/views/*}) do
     integration_tests
   end
 
-  # Watches views/rooms and runs integration tests
-  watch(%r{app/controllers/rooms_controller/*}) do
+  # Runs all integration tests when a controller is changed
+  watch(%r{app/controllers/*}) do
     integration_tests
   end
 
