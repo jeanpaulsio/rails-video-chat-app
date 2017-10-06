@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   resources :rooms do
     member do
-      get :toggle_status
-      get :claim
+      get  :toggle_status
+      get  :claim
+      post :authenticate
     end
   end
 
