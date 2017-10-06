@@ -14,20 +14,20 @@ ___
 * create a room on the fly
 * Send links to a room
 * Enter into an existing room
-* [Mute my microphone](https://stackoverflow.com/questions/35512314/how-to-mute-unmute-mic-in-webrtc)
-* Turn my video off
+* __[Mute my microphone](https://stackoverflow.com/questions/35512314/how-to-mute-unmute-mic-in-webrtc)__
+* __Turn my video off__
 
 ## As a guest, I can...
 
-* Create temporary rooms that expire in 24 hours
+* __Create temporary rooms that expire in 24 hours__
 * "register now to claim this room"
 
 ## As a member, I can...
 
 * Claim a room name
-* Password protect my room - some kind of authorization
-* upload a brand "logo" to customize
-* change page background color
+* __Password protect my room - some kind of authorization__
+* __upload a brand "logo" to customize__
+* __change page background color__
 
 ___
 
