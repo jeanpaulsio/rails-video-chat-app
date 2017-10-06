@@ -31,7 +31,6 @@ class RoomsController < ApplicationController
   def show
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
     @json_response = response.to_json
-    @user          = current_user || nil
   end
 
   def toggle_status
@@ -76,7 +75,7 @@ class RoomsController < ApplicationController
   private
 
   def set_user
-    @user = current_user
+    @user = current_user || nil
   end
 
   def set_room

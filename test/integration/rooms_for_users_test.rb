@@ -1,7 +1,7 @@
 require 'test_helper'
 
 # :nodoc:
-class MemberRoomFlowTest < ActionDispatch::IntegrationTest
+class RoomsForUsersTest < ActionDispatch::IntegrationTest
   test 'cannot claim an owned rooms' do
     room  = rooms(:restricted_room)
     jerry = users(:jerry)

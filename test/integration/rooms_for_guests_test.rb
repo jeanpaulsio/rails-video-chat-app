@@ -1,7 +1,7 @@
 require 'test_helper'
 
 # :nodoc:
-class GuestRoomFlowTest < ActionDispatch::IntegrationTest
+class RoomsForGuestsTest < ActionDispatch::IntegrationTest
   test 'can see the form to create a room' do
     get root_url
     assert_select 'input#room_name'
