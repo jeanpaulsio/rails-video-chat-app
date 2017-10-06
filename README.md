@@ -10,6 +10,8 @@
 - [x] Add Concept of a 'Guest User'
 - [ ] __WebRTC Support across different browsers__
 - [ ] Document API
+- [ ] API Tests
+- [ ] Error handling for non-existent pages (web + api level)
 
 ## As a user, I can...
 
@@ -34,39 +36,46 @@
 
 # API
 
-## Authentication
+[Authentication Using Devise Token Auth](https://github.com/lynndylanhurley/devise_token_auth)
 
-[Devise Token Auth](https://github.com/lynndylanhurley/devise_token_auth)
+# Users
 
-Request
+## Registration
+
+__POST__ Endpoint:
 
 ```
-POST /api/v1/auth/sign_in
+https://webrtc-on-rails.herokuapp.com/api/v1/auth
 ```
 
-Body
+Request Body:
 
 ```json
 {
   "email": "kramer@rails.com",
-  "password": "foobar"
+  "password": "foobar",
+  "password_confirmation": "foobar"
 }
 ```
 
-200 OK - Response Body
+200 - Response Body:
 
 ```json
 {
+    "status": "success",
     "data": {
-        "id": 3,
+        "id": 1,
         "email": "kramer@rails.com",
         "provider": "email",
-        "uid": "kramer@rails.com"
+        "uid": "kramer@rails.com",
+        "created_at": "2017-10-06T05:22:49.774Z",
+        "updated_at": "2017-10-06T05:22:49.998Z"
     }
 }
 ```
 
-200 OK - Response Headers (these must be passed along every authenticated request)
+200 - Response Headers:
+__(these must be passed along every authenticated request)__
 
 ```
 access-token → fdBnuoN8VtlOLLW-cKB58Q
@@ -76,7 +85,72 @@ expiry       → 1508475926
 uid          → kramer@rails.com
 ```
 
-401 Unauthenticated
+422 - Response Body:
+
+```json
+{
+    "status": "error",
+    "data": {
+        "id": null,
+        "email": "kramer@rails.com",
+        "created_at": null,
+        "updated_at": null,
+        "provider": "email",
+        "uid": "kramer@rails.com"
+    },
+    "errors": {
+        "email": [
+            "has already been taken"
+        ],
+        "full_messages": [
+            "Email has already been taken"
+        ]
+    }
+}
+```
+
+## Signing In
+
+POST Endpoint:
+
+```
+https://webrtc-on-rails.herokuapp.com/api/v1/auth/sign_in
+```
+
+Request Body:
+
+```json
+{
+  "email": "kramer@rails.com",
+  "password": "foobar"
+}
+```
+
+200 - Response Body:
+
+```json
+{
+    "data": {
+        "id": 1,
+        "email": "kramer@rails.com",
+        "provider": "email",
+        "uid": "kramer@rails.com"
+    }
+}
+```
+
+200 - Response Headers:
+__(these must be passed along every authenticated request)__
+
+```
+access-token → fdBnuoN8VtlOLLW-cKB58Q
+token-type   → Bearer
+client       → ucLUd-EIkM-ETYLWFSIL4w
+expiry       → 1508475926
+uid          → kramer@rails.com
+```
+
+401 - Response Body:
 
 ```json
 {
@@ -85,6 +159,3 @@ uid          → kramer@rails.com
     ]
 }
 ```
-
-
-

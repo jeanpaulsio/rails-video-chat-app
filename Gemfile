@@ -28,6 +28,9 @@ gem 'devise',            '~> 4.3'
 gem 'devise_token_auth', '~> 0.1.42'
 gem 'omniauth',          '~> 1.7'
 
+# api
+gem 'rack-cors', '~> 0.4.1'
+
 group :test do
   gem 'guard',                    '~> 2.14', '>= 2.14.1'
   gem 'guard-minitest',           '~> 2.4', '>= 2.4.6'
