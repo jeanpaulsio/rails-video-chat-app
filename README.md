@@ -14,6 +14,7 @@
 - [ ] Document API
 - [ ] API Tests
 - [ ] Error handling for non-existent pages (web + api level)
+- [ ] Let users remove the password from their room
 
 ## As a user, I can...
 
@@ -32,7 +33,6 @@
 - [x] Claim a room name
 - [ ] __Password protect my room - some kind of authorization__
 - [ ] __upload a brand "logo" to customize__
-- [ ] __change page background color__
 
 ---
 

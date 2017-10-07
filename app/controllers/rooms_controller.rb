@@ -3,7 +3,7 @@ require 'json'
 
 # :nodoc:
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, only: %i[index edit]
+  before_action :authenticate_user!, only: %i[index edit update]
   before_action :set_user
   before_action :set_room, only: %i[show edit update destroy
                                     toggle_status claim authenticate]
@@ -46,6 +46,7 @@ class RoomsController < ApplicationController
   end
 
   def update
+    redirect_to @room unless @room.user == current_user
     if @room.update_attributes(room_params)
       flash[:success] = 'You added a password to this room'
     else
