@@ -3,15 +3,16 @@ require 'json'
 
 # :nodoc:
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: %i[index edit]
   before_action :set_user
   before_action :set_room, only: %i[show edit update destroy
                                     toggle_status claim authenticate]
 
   def authenticate
-    if params[:thingy] == @room.password
+    password_hash = BCrypt::Password.new(@room.password)
+    if password_hash == params[:password]
       flash[:success] = 'Correct Password'
-      redirect_to action: 'show', thingy: params[:thingy]
+      redirect_to action: 'show', password: password_hash
     else
       flash[:notice] = 'INCORRECT PASSWORD'
     end
@@ -38,8 +39,24 @@ class RoomsController < ApplicationController
     end
   end
 
+  # TODO: Add test to make sure use is authenticated before editing
+  def edit
+    flash[:notice] = 'You cannot edit this room'
+    redirect_to @room unless @room.user == current_user
+  end
+
+  def update
+    if @room.update_attributes(room_params)
+      flash[:success] = 'You added a password to this room'
+    else
+      flash[:notice] = 'Somethign went wrong'
+    end
+
+    redirect_to @room
+  end
+
   def show
-    ask_for_password(@room, params[:thingy]) unless @room.password.nil? || @room.user == current_user
+    ask_for_password(@room, params[:password]) unless @room.password.nil? || @room.user == current_user
 
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
     @json_response = response.to_json
@@ -89,7 +106,7 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:name, :user_id)
+    params.require(:room).permit(:name, :user_id, :password)
   end
 
   def ask_for_password(room, password = nil)
