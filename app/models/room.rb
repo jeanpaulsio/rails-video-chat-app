@@ -16,10 +16,15 @@ class Room < ApplicationRecord
                    uniqueness: { case_sensitive: false }
 
   after_create :update_status
+  before_save :create_hashed_password, if: :password_changed?
 
   def update_status
     return if user_id.nil?
 
     unrestricted!
+  end
+
+  def create_hashed_password
+    self.password = BCrypt::Password.create(password)
   end
 end

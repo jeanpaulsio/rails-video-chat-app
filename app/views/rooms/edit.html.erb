@@ -1,0 +1,7 @@
+<h1>add a password</h1>
+
+<%= form_for @room do |f| %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.submit 'Edit Password' %>
+<% end %>
