@@ -33,14 +33,20 @@ class RoomTest < ActiveSupport::TestCase
     end
   end
 
-  test 'should create a temporary room for guests' do
+  test 'should create temporary room for guests' do
     room = Room.create!(name: 'Room')
     assert_equal room.status, 'temporary'
   end
 
-  test '#update_status should create an unrestricted room for users' do
+  test 'should create unrestricted room for users' do
     user = users(:jerry)
     room = user.rooms.create!(name: 'asdfasdf')
     assert_equal room.status, 'unrestricted'
+  end
+
+  test 'should hash password before saving' do
+    @temporary_room.password = 'foobar'
+    @temporary_room.save
+    assert_not_equal @temporary_room.password, 'foobar'
   end
 end

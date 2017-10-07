@@ -16,11 +16,10 @@ class Room < ApplicationRecord
                    uniqueness: { case_sensitive: false }
 
   after_create :update_status
-  before_save :create_hashed_password, if: :password_changed?
+  before_save  :create_hashed_password, if: :will_save_change_to_password?
 
   def update_status
     return if user_id.nil?
-
     unrestricted!
   end
 
