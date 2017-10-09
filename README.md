@@ -15,6 +15,15 @@
 - [ ] API Tests
 - [ ] Error handling for non-existent pages (web + api level)
 - [ ] Let users remove the password from their room
+- [ ] When ICE Servers cant be fetche, I get a nice error - maybe put this in a begin/rescue
+
+```
+SocketError in RoomsController#show
+
+
+Failed to open TCP connection to global.xirsys.net:443 (getaddrinfo: nodename nor servname provided, or not known)
+
+```
 
 ## As a user, I can...
 

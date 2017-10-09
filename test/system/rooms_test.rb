@@ -10,7 +10,6 @@ class RoomsTest < ApplicationSystemTestCase
     assert_text 'Invite by sharing this link:'
   end
 
-  # this needs to be more robust
   test 'claiming a room by registering' do
     visit root_url
 

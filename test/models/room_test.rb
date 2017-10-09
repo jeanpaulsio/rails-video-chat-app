@@ -63,6 +63,6 @@ class RoomTest < ActiveSupport::TestCase
 
     @temporary_room.unrestricted!
     assert_equal @temporary_room.status, 'unrestricted'
-    assert_equal @temporary_room.password, nil
+    assert_nil @temporary_room.password, nil
   end
 end

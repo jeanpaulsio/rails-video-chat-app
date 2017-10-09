@@ -3,23 +3,24 @@ require 'json'
 
 # :nodoc:
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, only: %i[index edit update]
   before_action :set_user
-  before_action :set_room, only: %i[show edit update destroy
-                                    toggle_status claim authenticate]
+  before_action :authenticate_user!, only: %i[index edit update]
+  before_action :set_room,           only: %i[show edit update destroy
+                                              toggle_status claim authenticate]
 
   def authenticate
     password_hash = BCrypt::Password.new(@room.password)
+
     if password_hash == params[:password]
-      flash[:success] = 'Correct Password'
+      flash[:success] = "You are now in the room: #{@room.name}"
       redirect_to action: 'show', password: password_hash
     else
-      flash[:notice] = 'INCORRECT PASSWORD'
+      flash[:notice] = 'You entered the incorrect password!'
     end
   end
 
   def index
-    @rooms = @user.rooms
+    @rooms     = @user.rooms
     @all_rooms = Room.all
   end
 
@@ -29,6 +30,7 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
+
     if @room.save
       flash[:success] = 'Invite by sharing this link: ' \
                         "#{request.original_url}/#{@room.slug}"
@@ -61,13 +63,14 @@ class RoomsController < ApplicationController
   def show
     ask_for_password(@room, params[:password]) unless @room.password.nil? || @room.user == current_user
 
+    # TODO: SocketError when no internet
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
     @json_response = response.to_json
   end
 
   def toggle_status
     if (@user.is_a? GuestUser) || (@room.user != @user)
-      flash[:notice] = 'You must own this room to do that!'
+      flash[:notice] = 'You are not allowed to do that!'
       redirect_to @room
       return
     end
@@ -79,23 +82,13 @@ class RoomsController < ApplicationController
   end
 
   def claim
-    if @room.user
-      flash[:notice] = 'Room has been taken'
+    if @room.user || (@user.is_a? GuestUser)
+      flash[:notice] = 'You are not allowed to do that!'
       redirect_to @room
       return
     end
 
-    if @user.is_a? GuestUser
-      flash[:notice] = 'You must register to claim this room!'
-      redirect_to @room
-      return
-    end
-
-    @room.user   = current_user
-    @room.status = 'unrestricted'
-    @room.save
-    flash[:success] = 'Room claimed'
-    redirect_to @room
+    claim_room
   end
 
   private
@@ -114,5 +107,13 @@ class RoomsController < ApplicationController
 
   def ask_for_password(room, password = nil)
     render 'rooms/authenticate' unless password == room.password
+  end
+
+  def claim_room
+    @room.user   = current_user
+    @room.status = 'unrestricted'
+    @room.save
+    flash[:success] = 'Room claimed'
+    redirect_to @room
   end
 end

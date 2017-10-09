@@ -19,17 +19,17 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
   test 'cannot claim a room' do
     get claim_room_path
     follow_redirect!
-    assert_select 'div.alert-notice', 'You must register to claim this room!'
+    assert_select 'div.alert-notice', 'You are not allowed to do that!'
   end
 
   test 'cannot change the status of a room' do
     get toggle_status_room_path(status: :unrestricted)
     follow_redirect!
-    assert_select 'div.alert-notice', 'You must own this room to do that!'
+    assert_select 'div.alert-notice', 'You are not allowed to do that!'
 
     get toggle_status_room_path(status: :restricted)
     follow_redirect!
-    assert_select 'div.alert-notice', 'You must own this room to do that!'
+    assert_select 'div.alert-notice', 'You are not allowed to do that!'
   end
 
   test 'can claim a room by registering' do

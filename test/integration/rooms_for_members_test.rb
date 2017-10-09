@@ -18,7 +18,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
 
     get claim_room_path
     follow_redirect!
-    assert_select 'div.alert-notice', 'Room has been taken'
+    assert_select 'div.alert-notice', 'You are not allowed to do that!'
   end
 
   test 'cannot toggle room status of another user\'s room' do
@@ -29,7 +29,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
 
     get toggle_status_room_path(status: :unrestricted)
     follow_redirect!
-    assert_select 'div.alert-notice', 'You must own this room to do that!'
+    assert_select 'div.alert-notice', 'You are not allowed to do that!'
   end
 
   test 'can create a room' do

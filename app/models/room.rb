@@ -15,18 +15,22 @@ class Room < ApplicationRecord
                    length: { maximum: 15 },
                    uniqueness: { case_sensitive: false }
 
-  after_create :update_status
+  after_create :make_room_public
   before_save  :create_hashed_password, if: :will_save_change_to_password?
-  before_save  :remove_password, if: :unrestricted?
+  before_save  :update_status,          if: :will_save_change_to_password?
+  before_save  :remove_password,        if: :unrestricted?
 
-  def update_status
+  def make_room_public
     return if user_id.nil?
     unrestricted!
   end
 
   def create_hashed_password
-    self.status = 'restricted'
-    self.password = password_is_blank ? nil : BCrypt::Password.create(password)
+    self.password = password_is_blank? ? nil : BCrypt::Password.create(password)
+  end
+
+  def update_status
+    self.status = password_is_blank? ? 'unrestricted' : 'restricted'
   end
 
   def remove_password
@@ -35,7 +39,7 @@ class Room < ApplicationRecord
 
   private
 
-  def password_is_blank
-    password.nil? || password.blank?
+  def password_is_blank?
+    password.blank? || password.nil?
   end
 end
