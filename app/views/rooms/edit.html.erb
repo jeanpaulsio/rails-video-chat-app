@@ -1,7 +1,14 @@
-<h1>add a password</h1>
+<h1>Create a Room Password</h1>
 
 <%= form_for @room do |f| %>
   <%= f.label :password %>
   <%= f.password_field :password %>
   <%= f.submit 'Edit Password' %>
+<% end %>
+
+<hr>
+
+<%= form_for @room do |f| %>
+  <%= f.hidden_field :password, value: "" %>
+  <%= f.submit 'Remove Password' %>
 <% end %>

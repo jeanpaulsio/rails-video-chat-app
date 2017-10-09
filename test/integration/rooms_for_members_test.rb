@@ -4,6 +4,7 @@ require 'test_helper'
 class RoomsForMembersTest < ActionDispatch::IntegrationTest
   def setup
     @kramers_room = rooms(:restricted_room)
+    @jerrys_room  = rooms(:unrestricted_room)
     @jerry        = users(:jerry)
 
     log_in_as(@jerry)

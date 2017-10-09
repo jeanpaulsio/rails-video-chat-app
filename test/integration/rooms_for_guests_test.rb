@@ -41,4 +41,14 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select 'div.alert-success', 'Room claimed'
   end
+
+  test 'cannot password protect a room' do
+    sign_up_as(email: 'jerry@rails.com')
+    follow_redirect!
+    assert_select 'h1', 'my room'
+
+    get edit_room_path
+    follow_redirect!
+    assert_select 'div.alert-notice', 'You cannot edit this room'
+  end
 end

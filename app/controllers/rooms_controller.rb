@@ -39,18 +39,20 @@ class RoomsController < ApplicationController
     end
   end
 
-  # TODO: Add test to make sure use is authenticated before editing
   def edit
-    flash[:notice] = 'You cannot edit this room'
-    redirect_to @room unless @room.user == current_user
+    unless @room.user == current_user
+      flash[:notice] = 'You cannot edit this room'
+      redirect_to @room
+    end
   end
 
   def update
     redirect_to @room unless @room.user == current_user
+
     if @room.update_attributes(room_params)
       flash[:success] = 'You added a password to this room'
     else
-      flash[:notice] = 'Somethign went wrong'
+      flash[:notice] = 'Something went wrong'
     end
 
     redirect_to @room

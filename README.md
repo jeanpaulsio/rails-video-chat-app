@@ -31,8 +31,8 @@
 ## As a member, I can...
 
 - [x] Claim a room name
-- [ ] __Password protect my room - some kind of authorization__
-- [ ] __upload a brand "logo" to customize__
+- [x] __Password protect my room - some kind of authorization__
+- [ ] __Choose a brand color for room__
 
 ---
 

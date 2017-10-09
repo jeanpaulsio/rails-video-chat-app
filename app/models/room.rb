@@ -17,6 +17,7 @@ class Room < ApplicationRecord
 
   after_create :update_status
   before_save  :create_hashed_password, if: :will_save_change_to_password?
+  before_save  :remove_password, if: :unrestricted?
 
   def update_status
     return if user_id.nil?
@@ -24,6 +25,17 @@ class Room < ApplicationRecord
   end
 
   def create_hashed_password
-    self.password = BCrypt::Password.create(password)
+    self.status = 'restricted'
+    self.password = password_is_blank ? nil : BCrypt::Password.create(password)
+  end
+
+  def remove_password
+    self.password = nil
+  end
+
+  private
+
+  def password_is_blank
+    password.nil? || password.blank?
   end
 end
