@@ -6,16 +6,13 @@
 
 # TODO
 
+- [ ] __WebRTC Support across different browsers__
+- [ ] Test coverage for WebRTC JS stuff
 - [ ] Front End UI
 - [ ] Create system tests
-- [ ] Test coverage for WebRTC JS stuff
-- [x] Add Concept of a 'Guest User'
-- [ ] __WebRTC Support across different browsers__
-- [ ] Document API
-- [ ] API Tests
+- [ ] Create API + API tests
 - [ ] Error handling for non-existent pages (web + api level)
-- [ ] Let users remove the password from their room
-- [ ] When ICE Servers cant be fetche, I get a nice error - maybe put this in a begin/rescue
+- [ ] When ICE Servers cant be fetched, I get a nice error - maybe put this in a begin/rescue
 
 ```
 SocketError in RoomsController#show
