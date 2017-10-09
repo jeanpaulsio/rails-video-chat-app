@@ -65,4 +65,10 @@ class RoomTest < ActiveSupport::TestCase
     assert_equal @temporary_room.status, 'unrestricted'
     assert_nil @temporary_room.password, nil
   end
+
+  test 'should set default password when making room restricted' do
+    @temporary_room.restricted!
+    password_hash = BCrypt::Password.new(@temporary_room.password)
+    assert_equal password_hash, 'password'
+  end
 end
