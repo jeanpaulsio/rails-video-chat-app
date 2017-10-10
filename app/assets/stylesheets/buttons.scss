@@ -1,0 +1,9 @@
+@import "custom";
+
+.btn-salmon {
+  background: $brand-primary;
+  color: white;
+  &:hover {
+    background: darken($brand-primary, 5%);
+  }
+}

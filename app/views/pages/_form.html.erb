@@ -1,0 +1,7 @@
+<%= form_for @room do |f| %>
+  <div class="form-group">
+    <h2 class="text-secondary">Create a Room</h2>
+    <%= f.text_field :name, required: true, class: "form-control bg-light" %>
+  </div>
+  <%= f.submit "Create New Room", class: "btn btn-salmon btn-block" %>
+<% end %>

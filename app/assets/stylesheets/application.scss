@@ -1,8 +1,25 @@
 @import "custom";
 @import "bootstrap";
+@import "buttons";
 
 // Global
-html, body {
+* {
+  transition: width 0.4s, height 0.4s, font-size 0.4s, font-weight 0.4s;
+}
+
+html,
+body {
   width: 100%;
   height: 100%;
+  background-image: image-url("bg.png");
+}
+
+h1 {
+  color: $brand-primary;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 300;
 }

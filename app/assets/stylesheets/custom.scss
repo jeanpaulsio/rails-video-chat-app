@@ -1,5 +1,14 @@
 // Redefine Bootstrap variables here
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
 
 // Fonts
 $font-family-base: 'Work Sans', sans-serif;
+
+// Colors
+$brand-primary: #fa4932;
+
+
+// Links
+$link-color:            $brand-primary !default;
+$link-hover-color:      darken($link-color, 15%) !default;
+$link-hover-decoration: underline !default;

@@ -12,5 +12,6 @@ function toggleForm() {
 
 function joinRoom() {
   var roomName = document.getElementById("roomName").value
+  if (roomName === "") return alert('You must enter a room name!');
   window.location = "/rooms/" + roomName
 }
