@@ -1,9 +1,37 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container h-75 w-100">
 
-<!-- TODO: create a partial for this -->
-<%= form_for @room do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit 'Create Room' %>
+  <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-md-8">
+        <div class="card mt-3 mb-3 p-3">
+          <div class="card-block">
+
+            <div id="createRoomForm">
+              <!-- TODO: create a partial for this -->
+              <%= form_for @room do |f| %>
+                <%= f.label :create_a_room %>
+                <%= f.text_field :name %>
+                <%= f.submit 'Create New Room' %>
+              <% end %>
+
+              <button onclick="toggleForm()">Already know where you're going?</button>
+            </div>
+
+            <div id="goToRoomForm">
+              <input id="roomName" type="text">
+              <button onclick="joinRoom()">Join Room</button>
+              <button onclick="toggleForm()">Need to Create a Room?</button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<% content_for :page_js do %>
+  <script type="text/javascript">
+    <%= render file: "#{Rails.root}/app/views/pages/js/home.js" %>
+  </script>
 <% end %>

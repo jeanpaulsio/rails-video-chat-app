@@ -28,4 +28,14 @@ class RoomsTest < ApplicationSystemTestCase
     click_on 'claim room'
     assert_text 'Room claimed'
   end
+
+  test 'can enter an existing room from home page' do
+    skip 'not yet implemented'
+  end
+
+  test 'friendly message when entering a non existent room' do
+    skip 'not yet implemented'
+  end
+
+
 end
