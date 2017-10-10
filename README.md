@@ -9,6 +9,7 @@
 - [ ] __WebRTC Support across different browsers__
 - [ ] Test coverage for WebRTC JS stuff
 - [ ] Front End UI
+- [ ] Figure Out TurboLinks stuff
 - [ ] Create system tests
 - [ ] Create API + API tests
 - [ ] Error handling for non-existent pages (web + api level)

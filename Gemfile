@@ -24,6 +24,11 @@ gem 'sass-rails',   '~> 5.0'
 gem 'turbolinks',   '~> 5'
 gem 'uglifier',     '>= 1.3.0'
 
+# favicon
+group :development do
+  gem 'rails_real_favicon'
+end
+
 # authentication
 gem 'devise',            '~> 4.3'
 gem 'devise_token_auth', '~> 0.1.42'
