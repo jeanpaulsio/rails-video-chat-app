@@ -19,17 +19,17 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
   test 'cannot claim a room' do
     get claim_room_path
     follow_redirect!
-    assert_select 'div.alert-notice', 'You are not allowed to do that!'
+    assert_select 'div#flash-message', 'You are not allowed to do that!'
   end
 
   test 'cannot change the status of a room' do
     get toggle_status_room_path(status: :unrestricted)
     follow_redirect!
-    assert_select 'div.alert-notice', 'You are not allowed to do that!'
+    assert_select 'div#flash-message', 'You are not allowed to do that!'
 
     get toggle_status_room_path(status: :restricted)
     follow_redirect!
-    assert_select 'div.alert-notice', 'You are not allowed to do that!'
+    assert_select 'div#flash-message', 'You are not allowed to do that!'
   end
 
   test 'can claim a room by registering' do
@@ -39,7 +39,7 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
 
     get claim_room_path
     follow_redirect!
-    assert_select 'div.alert-success', 'Room claimed'
+    assert_select 'div#flash-message', 'Room claimed'
   end
 
   test 'cannot password protect a room' do
@@ -49,6 +49,6 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
 
     get edit_room_path
     follow_redirect!
-    assert_select 'div.alert-notice', 'You cannot edit this room'
+    assert_select 'div#flash-message', 'You cannot edit this room'
   end
 end
