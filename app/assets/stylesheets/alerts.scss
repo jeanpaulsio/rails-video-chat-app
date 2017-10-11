@@ -1,0 +1,6 @@
+@import "custom";
+
+.alert-notice, .alert-alert {
+  background: $state-success-bg;
+  color: $state-success-text;
+}
