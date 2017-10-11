@@ -19,10 +19,11 @@ class Room < ApplicationRecord
   before_save  :create_hashed_password, if: :will_save_change_to_password?
   before_save  :update_status,          if: :will_save_change_to_password?
   before_save  :remove_password,        if: :unrestricted?
-  before_save  :set_default_password,   if: :restricted?
+  # before_save  :set_default_password,   if: :restricted?
 
   def make_room_public
     return if user_id.nil?
+    return unless password.empty?
     unrestricted!
   end
 

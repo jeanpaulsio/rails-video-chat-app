@@ -13,6 +13,7 @@
 - [ ] Create system tests
 - [ ] Create API + API tests
 - [ ] Error handling for non-existent pages (web + api level)
+- [ ] Copy link to clipboard
 - [ ] When ICE Servers cant be fetched, I get a nice error - maybe put this in a begin/rescue
 
 ```

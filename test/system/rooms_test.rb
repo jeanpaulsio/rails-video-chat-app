@@ -37,5 +37,11 @@ class RoomsTest < ApplicationSystemTestCase
     skip 'not yet implemented'
   end
 
+  test 'can create a room with a password' do
+    skip 'not yet implemented'
+  end
 
+  test 'sets a default password when restricting if no password given' do
+    skip 'not yet implemented'
+  end
 end

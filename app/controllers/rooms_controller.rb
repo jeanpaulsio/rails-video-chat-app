@@ -4,7 +4,7 @@ require 'json'
 # :nodoc:
 class RoomsController < ApplicationController
   before_action :set_user
-  before_action :authenticate_user!, only: %i[index edit update]
+  before_action :authenticate_user!, only: %i[index edit new update]
   before_action :set_room,           only: %i[show edit update destroy
                                               toggle_status claim authenticate]
 
@@ -20,8 +20,7 @@ class RoomsController < ApplicationController
   end
 
   def index
-    @rooms     = @user.rooms
-    @all_rooms = Room.all
+    @rooms = @user.rooms
   end
 
   def new
@@ -61,7 +60,12 @@ class RoomsController < ApplicationController
   end
 
   def show
-    ask_for_password(@room, params[:password]) unless @room.password.nil? || @room.user == current_user
+    ask_for_password(@room, params[:password]) unless
+      @room.password.nil? ||
+      @room.user == current_user
+
+    flash[:success] = 'Invite by sharing this link: ' \
+                      "#{request.original_url}/#{@room.slug}"
 
     # TODO: SocketError when no internet
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json

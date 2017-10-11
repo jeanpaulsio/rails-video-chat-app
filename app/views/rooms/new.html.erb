@@ -1,8 +1,29 @@
-<h1>new room</h1>
+<div class="container h-75 w-100">
+  <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-lg-6 text-center">
+        <h1>Create a Room</h1>
+        <div class="card mt-3 mb-3 p-5">
+          <div class="card-block">
+            <!-- TODO: Refactor this into its own form -->
+            <%= form_for @room do |f| %>
+              <div class="form-group">
+                <h2 class="text-secondary">Room Name</h2>
+                <%= f.text_field :name, class: "form-control", required: true %>
+              </div>
 
-<%= form_for @room do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.submit 'Create Room' %>
-<% end %>
+              <div class="form-group">
+                <h2 class="text-secondary">Room Password <small><em>optional</em></small></h2>
+                <%= f.text_field :password, class: "form-control" %>
+              </div>
+
+              <%= f.hidden_field :user_id, value: current_user.id %>
+
+              <div class="form-group">
+                <%= f.submit 'Create a New Room', class: "btn btn-salmon btn-block" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

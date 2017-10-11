@@ -1,16 +1,6 @@
-<h1>Rooms#index</h1>
-
-<%= link_to "create a room", new_room_path %>
-
-<hr>
-<h1>my rooms</h1>
+<h1>Your Rooms</h1>
 <% @rooms.each do |room| %>
   <%= link_to room.name, room %><br>
 <% end %>
 
-<hr>
-<h1>all rooms</h1>
-<% @all_rooms.each do |room| %>
-  <%= link_to room.name, room %><br>
-<% end %>
-
+<%= link_to "create a room", new_room_path, class: "btn btn-salmon" %>
