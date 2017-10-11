@@ -12,9 +12,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
 
   test 'cannot claim another user\'s room' do
     get room_path(@kramers_room)
-
     assert_template 'rooms/show'
-    assert_select 'h1', 'Restricted Room'
 
     get claim_room_path
     follow_redirect!
@@ -23,9 +21,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
 
   test 'cannot toggle room status of another user\'s room' do
     get room_path(@kramers_room)
-
     assert_template 'rooms/show'
-    assert_select 'h1', 'Restricted Room'
 
     get toggle_status_room_path(status: :unrestricted)
     follow_redirect!
@@ -42,7 +38,5 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_template 'rooms/show'
-    assert_select 'div.alert-success'
-    assert_select 'h1', "jerry's room"
   end
 end

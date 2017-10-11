@@ -12,8 +12,6 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_template 'rooms/show'
-    assert_select 'div.alert-success'
-    assert_select 'h1', 'my room'
   end
 
   test 'cannot claim a room' do
@@ -35,17 +33,15 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
   test 'can claim a room by registering' do
     sign_up_as(email: 'jerry@rails.com')
     follow_redirect!
-    assert_select 'h1', 'my room'
 
     get claim_room_path
     follow_redirect!
-    assert_select 'div#flash-message', 'Room claimed'
+    assert_select 'div#flash-message', 'Invite by sharing this link: http://www.example.com/rooms/my-room'
   end
 
   test 'cannot password protect a room' do
     sign_up_as(email: 'jerry@rails.com')
     follow_redirect!
-    assert_select 'h1', 'my room'
 
     get edit_room_path
     follow_redirect!

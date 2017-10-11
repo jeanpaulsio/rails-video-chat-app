@@ -23,7 +23,7 @@ class Room < ApplicationRecord
 
   def make_room_public
     return if user_id.nil?
-    return unless password.empty?
+    return unless password_is_blank?
     unrestricted!
   end
 

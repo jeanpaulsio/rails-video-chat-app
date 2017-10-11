@@ -9,6 +9,7 @@
 - [ ] __WebRTC Support across different browsers__
 - [ ] Test coverage for WebRTC JS stuff
 - [ ] Front End UI
+- [ ] React on Rails is integrated - need to make UI components for some items. maybe some of the forms?
 - [ ] Figure Out TurboLinks stuff
 - [ ] Create system tests
 - [ ] Create API + API tests
