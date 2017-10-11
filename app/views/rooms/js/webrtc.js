@@ -13,7 +13,7 @@ const leaveBtnContainer = document.getElementById("leave-btn-container");
 // Configuration
 let roomName = document.getElementById("room-name").dataset.room;
 let xirsysIceCreds = JSON.parse(document.getElementById("xirsys-creds").dataset.xirsys);
-let constraints = { audio: true, video: true };
+let constraints = { audio: false, video: true };
 xirsysIceCreds = JSON.parse(xirsysIceCreds)["v"];
 
 // Global Objects

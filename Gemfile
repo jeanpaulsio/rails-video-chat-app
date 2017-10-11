@@ -24,6 +24,10 @@ gem 'sass-rails',   '~> 5.0'
 gem 'turbolinks',   '~> 5'
 gem 'uglifier',     '>= 1.3.0'
 
+# react on rails
+gem 'react_on_rails', '9.0.0'
+gem 'webpacker',      '~> 3.0'
+
 # favicon
 group :development do
   gem 'rails_real_favicon'
