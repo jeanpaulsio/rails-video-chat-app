@@ -65,7 +65,7 @@ class RoomsController < ApplicationController
       @room.user == current_user
 
     flash.now[:success] = 'Invite by sharing this link: ' \
-                          "#{request.original_url}/#{@room.slug}"
+                          "#{request.original_url}"
 
     # TODO: SocketError when no internet
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json

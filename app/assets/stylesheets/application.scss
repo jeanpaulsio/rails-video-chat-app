@@ -2,6 +2,7 @@
 @import "bootstrap";
 @import "buttons";
 @import "alerts";
+@import "video";
 
 // Global
 * {
@@ -23,4 +24,8 @@ h1 {
 h2 {
   font-size: 2em;
   font-weight: 300;
+}
+
+#leave-btn-container {
+  display: none;
 }

@@ -4,7 +4,7 @@ const EXCHANGE = "EXCHANGE";
 const REMOVE_USER = "REMOVE_USER";
 
 // DOM Elements
-const currentUser = document.getElementById("currentUser").innerHTML;
+const currentUser = document.getElementById("currentUser").dataset.email;
 const selfView = document.getElementById("selfView");
 const remoteViewContainer = document.getElementById("remoteViewContainer");
 const joinBtnContainer = document.getElementById("join-btn-container");

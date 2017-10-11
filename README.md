@@ -24,6 +24,14 @@ Failed to open TCP connection to global.xirsys.net:443 (getaddrinfo: nodename no
 
 ```
 
+# Bugs
+
+* test to make sure the correct link is given in the flash notice. when a user enters a room with a password, they get a link like this:
+
+```
+Invite by sharing this link: http://localhost:3000/rooms/room-name?password=%242a%2410%24wTA2KjtiC8Q17%2FskRUODFuRjekAVr3P.53i4lzS.19l.lhiuFyaXK
+```
+
 ## As a user, I can...
 
 - [x] create a room on the fly

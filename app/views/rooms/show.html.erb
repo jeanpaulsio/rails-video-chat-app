@@ -1,55 +1,57 @@
-<h1><%= @room.name %></h1>
-<%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
+<!-- TODO styling here needs some TLC as well -->
 
-<hr>
+<div class="container">
+  <div class="row justify-content-center">
+    <ul class="list-group">
+      <li class="list-group-item">
+        TODO: do something about these links and their visibility
+      </li>
+      <li class="list-group-item">
+        <%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
+      </li>
+      <li class="list-group-item">
+        <%= link_to "Make Public", toggle_status_room_path(status: :unrestricted) %>
+      </li>
+      <li class="list-group-item">
+        <%= link_to "Make Private", toggle_status_room_path(status: :restricted) %>
+      </li>
+      <li class="list-group-item">
+        <%= link_to "Claim Room", claim_room_path %>
+      </li>
+      <li class="list-group-item">
+        <%= link_to "Add Password", edit_room_path %>
+      </li>
+      <li class="list-group-item">
+        <%= @room.inspect %>
+      </li>
+    </ul>
+  </div>
 
-<%= link_to "make unrestricted", toggle_status_room_path(status: :unrestricted) %>
-<%= link_to "make restricted", toggle_status_room_path(status: :restricted) %>
+  <div class="row">
+    <span id="room-name" data-room='<%= @room.slug %>'></span>
+    <span id="xirsys-creds" data-xirsys='<%= @json_response.html_safe %>'></span>
+    <span id="currentUser" data-email='<%= @user.email %>'></span>
 
-<hr>
-
-<%= link_to "claim room", claim_room_path %>
-
-<hr>
-
-<%= link_to "add password", edit_room_path %>
-
-<hr>
-
-<%= @room.inspect %>
-
-<span id="room-name" data-room='<%= @room.slug %>'></span>
-
-<h1>Action Cable Signaling Server</h1>
-
-<span id="xirsys-creds" data-xirsys='<%= @json_response.html_safe %>'>
-</span>
+    <div id="remoteViewContainer"></div>
 
 
-<div>User's Email
-  <span id="currentUser" class="badge badge-primary"><%= @user.email %></span>
-</div>
-
-<div id="remoteViewContainer"></div>
-
-<div class="row">
-  <div class="col-md-12">
     <div id="localViewContainer">
       <video id="selfView" autoplay></video>
     </div>
+
+
+    <div id="join-btn-container">
+      <button onclick="handleJoinSession()" class="btn btn-success">
+        Join Room
+      </button>
+    </div>
+
+    <div id="leave-btn-container">
+      <button onclick="handleLeaveSession()" class="btn btn-danger">
+        Leave Room
+      </button>
+    </div>
   </div>
-</div>
-
-<div id="join-btn-container">
-  <button onclick="handleJoinSession()" class="btn btn-success">
-    Join Room
-  </button>
-</div>
-
-<div id="leave-btn-container">
-  <button onclick="handleLeaveSession()" class="btn btn-danger">
-    Leave Room
-  </button>
 </div>
 
 <% content_for :page_js do %>
