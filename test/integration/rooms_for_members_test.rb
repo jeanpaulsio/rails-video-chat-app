@@ -5,6 +5,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
   def setup
     @kramers_room = rooms(:restricted_room)
     @jerrys_room  = rooms(:unrestricted_room)
+    @kramer       = users(:kramer)
     @jerry        = users(:jerry)
 
     log_in_as(@jerry)
@@ -12,6 +13,10 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
 
   test 'cannot claim another user\'s room' do
     get room_path(@kramers_room)
+    assert_template 'rooms/authenticate'
+
+    post authenticate_room_path, params: { password: 'foobar' }
+    follow_redirect!
     assert_template 'rooms/show'
 
     get claim_room_path
@@ -21,6 +26,10 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
 
   test 'cannot toggle room status of another user\'s room' do
     get room_path(@kramers_room)
+    assert_template 'rooms/authenticate'
+
+    post authenticate_room_path, params: { password: 'foobar' }
+    follow_redirect!
     assert_template 'rooms/show'
 
     get toggle_status_room_path(status: :unrestricted)
@@ -42,7 +51,7 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
     assert_select 'input#room_name'
 
     assert_difference 'Room.count', 1 do
-      post rooms_path, params: { room: { name: "jerry's room" } }
+      post rooms_path, params: { room: { name: 'jerrys room' } }
     end
 
     follow_redirect!
@@ -64,17 +73,45 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
     end
 
     private_room  = Room.find_by_slug('private-room')
-    password_hash = BCrypt::Password.new(private_room.password)
+    password_hash = private_room.check_hashed_password(private_room.password)
 
     assert_equal password_hash, 'foobar'
     assert_equal private_room.status, 'restricted'
   end
 
   test 'can add a password to their room' do
-    skip 'not yet implemented'
+    get new_room_path
+    assert_select 'input#room_name'
+
+    assert_difference 'Room.count', 1 do
+      post rooms_path, params: { room: { name: 'jerrys room' } }
+    end
+
+    room = Room.find_by_slug('jerrys-room')
+    patch room_path(room), params: { room: { password: 'foobar' } }
+
+    room.reload
+    password = room.password
+    assert_equal room.check_hashed_password(password), 'foobar'
+    assert_equal room.status, 'restricted'
   end
 
   test 'can make a private room public' do
-    skip 'not yet implemented'
+    log_out
+    log_in_as(@kramer)
+
+    get room_path(@kramers_room)
+    assert_template 'rooms/show'
+
+    password = @kramers_room.password
+    assert_equal @kramers_room.status, 'restricted'
+    assert_equal @kramers_room.check_hashed_password(password), 'foobar'
+
+    get toggle_status_room_path(status: :unrestricted)
+    follow_redirect!
+
+    @kramers_room.reload
+    assert_equal @kramers_room.status, 'unrestricted'
+    assert_nil @kramers_room.password
   end
 end

@@ -48,8 +48,6 @@ class RoomsController < ApplicationController
   end
 
   def update
-    redirect_to @room unless @room.user == current_user
-
     if @room.update_attributes(room_params)
       flash[:success] = 'You added a password to this room'
     else

@@ -1,9 +1,12 @@
 <h1>Create a Room Password</h1>
 
 <%= form_for @room do |f| %>
+  <%= f.label :name, "Room Name" %>
+  <%= f.text_field :name, class: "form-control" %>
+
   <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.submit 'Edit Password' %>
+  <%= f.password_field :password, class: "form-control" %>
+  <%= f.submit 'Edit Password', class: "btn btn-salmon" %>
 <% end %>
 
 <hr>

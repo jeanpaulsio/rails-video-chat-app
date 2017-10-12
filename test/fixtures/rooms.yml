@@ -10,4 +10,5 @@ unrestricted_room:
 restricted_room:
   name: Restricted Room
   status: restricted
+  password: <%= BCrypt::Password.create('foobar') %>
   user: kramer

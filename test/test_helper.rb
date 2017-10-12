@@ -30,4 +30,8 @@ class ActionDispatch::IntegrationTest
       }
     }
   end
+
+  def log_out
+    delete destroy_user_session_path
+  end
 end
