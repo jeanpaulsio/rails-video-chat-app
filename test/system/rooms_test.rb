@@ -2,6 +2,10 @@ require 'application_system_test_case'
 
 # :nodoc:
 class RoomsTest < ApplicationSystemTestCase
+  def setup
+    @jerrys_room = rooms(:unrestricted_room)
+  end
+
   test 'creating a room' do
     visit root_url
 
@@ -11,11 +15,12 @@ class RoomsTest < ApplicationSystemTestCase
   end
 
   test 'claiming a room by registering' do
-    skip 'Not yet implemented'
+    skip 'UI not completed'
+
     visit root_url
 
     fill_in 'Name', with: 'Room 2'
-    click_on 'Create Room'
+    click_on 'Create New Room'
     assert_text 'Invite by sharing this link:'
 
     click_on 'Register'
@@ -30,8 +35,9 @@ class RoomsTest < ApplicationSystemTestCase
     assert_text 'Room claimed'
   end
 
-  test 'can enter an existing room from home page' do
-    skip 'not yet implemented'
+  test 'can enter an existing room from anywhere' do
+    visit room_path(@jerrys_room)
+    assert_text 'Unrestricted Room'
   end
 
   test 'friendly message when entering a non existent room' do
@@ -40,18 +46,6 @@ class RoomsTest < ApplicationSystemTestCase
 
   test 'can create a room with a password' do
     skip 'not yet implemented'
-  end
-
-  test 'sets a default password when restricting if no password given' do
-    skip 'not yet implemented'
-  end
-
-  test 'can make a room public' do
-    skip 'not yet implemented'
-    # user logs in
-    # makes a room private - sets a password
-    # click on make public
-    # check to make sure no more password
   end
 
   test 'gracefully handles failed ICE requests' do

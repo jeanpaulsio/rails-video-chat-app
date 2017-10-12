@@ -2,7 +2,7 @@ document.getElementById("copyRoomName").addEventListener("click", function(e) {
   e.preventDefault();
 
   var copied;
-  document.getElementById("copyRoomName").select()
+  document.getElementById("copyRoomName").select();
 
   try {
     copied = document.execCommand("copy");
@@ -34,6 +34,7 @@ let xirsysIceCreds = JSON.parse(
 );
 let constraints = { audio: false, video: true };
 xirsysIceCreds = JSON.parse(xirsysIceCreds)["v"];
+// xirsysIceCreds = { iceServers: [{ url: "stun:stun.l.google.com:19302" }] };
 
 // Global Objects
 let pcPeers = {};

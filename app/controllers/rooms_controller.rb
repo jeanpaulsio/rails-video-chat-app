@@ -7,6 +7,8 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit new update]
   before_action :set_room,           only: %i[show edit update destroy
                                               toggle_status claim authenticate]
+  rescue_from ActiveRecord::RecordNotFound, with: :room_not_found
+  rescue_from SocketError, with: :socket_error
 
   def authenticate
     password_hash = @room.check_hashed_password(@room.password)
@@ -65,7 +67,6 @@ class RoomsController < ApplicationController
     flash.now[:success] = 'Invite by sharing this link: ' \
                           "#{request.original_url}"
 
-    # TODO: SocketError when no internet
     return if Rails.env == 'test'
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
     @json_response = response.to_json
@@ -120,5 +121,15 @@ class RoomsController < ApplicationController
     @room.save
     flash[:success] = 'Room claimed'
     redirect_to @room
+  end
+
+  def room_not_found
+    flash[:notice] = 'That room does not exist, would you like to create it?'
+    redirect_to new_room_path
+  end
+
+  def socket_error
+    flash[:notice] = 'TODO: Something went wrong with the WebRTC stuff'
+    redirect_to root_path
   end
 end
