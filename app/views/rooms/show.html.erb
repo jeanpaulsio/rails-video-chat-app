@@ -7,6 +7,9 @@
         TODO: do something about these links and their visibility
       </li>
       <li class="list-group-item">
+        TODO: probably get rid of the flash alert with the room link
+      </li>
+      <li class="list-group-item">
         <%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
       </li>
       <li class="list-group-item">
@@ -20,6 +23,10 @@
       </li>
       <li class="list-group-item">
         <%= link_to "Add Password", edit_room_path %>
+      </li>
+      <li class="list-group-item">
+        click to copy
+        <input class="form-control" id="copyRoomName" type="text" value='<%= "https://webrtc-on-rails.herokuapp.com/rooms/#{@room.slug}" %>' />
       </li>
       <li class="list-group-item">
         <%= @room.inspect %>

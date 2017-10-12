@@ -1,3 +1,20 @@
+document.getElementById("copyRoomName").addEventListener("click", function(e) {
+  e.preventDefault();
+
+  var copied;
+  document.getElementById("copyRoomName").select()
+
+  try {
+    copied = document.execCommand("copy");
+  } catch (e) {
+    copied = false;
+  }
+
+  if (copied) {
+    console.log("successfully copied!");
+  }
+});
+
 // Broadcast Types
 const JOIN_ROOM = "JOIN_ROOM";
 const EXCHANGE = "EXCHANGE";
@@ -12,7 +29,9 @@ const leaveBtnContainer = document.getElementById("leave-btn-container");
 
 // Configuration
 let roomName = document.getElementById("room-name").dataset.room;
-let xirsysIceCreds = JSON.parse(document.getElementById("xirsys-creds").dataset.xirsys);
+let xirsysIceCreds = JSON.parse(
+  document.getElementById("xirsys-creds").dataset.xirsys
+);
 let constraints = { audio: false, video: true };
 xirsysIceCreds = JSON.parse(xirsysIceCreds)["v"];
 
