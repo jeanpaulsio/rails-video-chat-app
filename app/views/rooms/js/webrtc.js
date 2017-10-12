@@ -29,12 +29,8 @@ const leaveBtnContainer = document.getElementById("leave-btn-container");
 
 // Configuration
 let roomName = document.getElementById("room-name").dataset.room;
-let xirsysIceCreds = JSON.parse(
-  document.getElementById("xirsys-creds").dataset.xirsys
-);
 let constraints = { audio: false, video: true };
-xirsysIceCreds = JSON.parse(xirsysIceCreds)["v"];
-// xirsysIceCreds = { iceServers: [{ url: "stun:stun.l.google.com:19302" }] };
+let xirsysIceCreds;
 
 // Global Objects
 let pcPeers = {};
@@ -44,7 +40,17 @@ window.onload = () => {
   initialize();
 };
 
-const initialize = () => {
+const initialize = async () => {
+  App.ice = await App.cable.subscriptions.create(
+    { channel: "IceChannel", id: roomName },
+    {
+      received: data => {
+        xirsysIceCreds = JSON.parse(data);
+        xirsysIceCreds = xirsysIceCreds["v"];
+      }
+    }
+  );
+
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(stream => {

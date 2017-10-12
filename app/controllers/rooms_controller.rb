@@ -68,8 +68,7 @@ class RoomsController < ApplicationController
                           "#{request.original_url}"
 
     return if Rails.env == 'test'
-    response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
-    @json_response = response.to_json
+    XirsysCredentialsJob.perform_later(@room.slug)
   end
 
   def toggle_status
