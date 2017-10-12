@@ -34,7 +34,7 @@ class RoomsController < ApplicationController
 
     if @room.save
       flash[:success] = 'Invite by sharing this link: ' \
-                        "#{request.original_url}/#{@room.slug}"
+                        "#{request.base_url}/rooms/#{@room.slug}"
       redirect_to @room
     else
       flash[:notice] = 'Sorry, that room is taken!'

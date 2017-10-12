@@ -25,7 +25,7 @@
       </li>
       <li class="list-group-item">
         click to copy
-        <input class="form-control" id="copyRoomName" type="text" value='<%= "https://webrtc-on-rails.herokuapp.com/rooms/#{@room.slug}" %>' />
+        <input class="form-control" id="copyRoomName" type="text" value='<%= "#{request.base_url}/rooms/#{@room.slug}" %>' />
       </li>
       <li class="list-group-item">
         <%= @room.inspect %>
