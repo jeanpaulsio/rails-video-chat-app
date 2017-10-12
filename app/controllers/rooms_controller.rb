@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
                                               toggle_status claim authenticate]
 
   def authenticate
-    password_hash = BCrypt::Password.new(@room.password)
+    password_hash = @room.check_hashed_password(@room.password)
 
     if password_hash == params[:password]
       flash[:success] = "You are now in the room: #{@room.name}"
@@ -68,12 +68,15 @@ class RoomsController < ApplicationController
                           "#{request.original_url}"
 
     # TODO: SocketError when no internet
+    return if Rails.env == 'test'
     response       = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
     @json_response = response.to_json
   end
 
   def toggle_status
-    if (@user.is_a? GuestUser) || (@room.user != @user)
+    if (@user.is_a? GuestUser) ||
+       (@room.user != @user) ||
+       (params[:status] == 'restricted')
       flash[:notice] = 'You are not allowed to do that!'
       redirect_to @room
       return

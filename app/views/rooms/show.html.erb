@@ -36,7 +36,7 @@
 
   <div class="row">
     <span id="room-name" data-room='<%= @room.slug %>'></span>
-    <span id="xirsys-creds" data-xirsys='<%= @json_response.html_safe %>'></span>
+    <span id="xirsys-creds" data-xirsys='<%= @json_response && @json_response.html_safe %>'></span>
     <span id="currentUser" data-email='<%= @user.email %>'></span>
 
     <div id="remoteViewContainer"></div>
