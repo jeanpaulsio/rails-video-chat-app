@@ -6,9 +6,7 @@ class XirsysCredentialsJob < ApplicationJob
   queue_as :default
 
   def perform(room_id)
-    puts 'inside XirsysCredentialsJob'
     response = RestClient.put ENV['GET_XIRSYS_ICE'], accept: :json
-
     ActionCable.server.broadcast "ice_#{room_id}", response
   end
 end

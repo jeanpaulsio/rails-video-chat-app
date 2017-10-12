@@ -64,9 +64,6 @@ class RoomsController < ApplicationController
       @room.password.nil? ||
       @room.user == current_user
 
-    flash.now[:success] = 'Invite by sharing this link: ' \
-                          "#{request.original_url}"
-
     return if Rails.env == 'test'
     XirsysCredentialsJob.perform_later(@room.slug)
   end

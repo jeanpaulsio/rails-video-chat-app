@@ -1,64 +1,75 @@
 <!-- TODO styling here needs some TLC as well -->
 <div class="container">
   <div class="row justify-content-center">
-    <ul class="list-group">
-      <li class="list-group-item">
-        TODO: do something about these links and their visibility
-      </li>
-      <li class="list-group-item">
-        TODO: probably get rid of the flash alert with the room link
-      </li>
-      <li class="list-group-item">
-        <%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
-      </li>
-      <li class="list-group-item">
-        <%= link_to "Make Public", toggle_status_room_path(status: :unrestricted) %>
-      </li>
-      <li class="list-group-item">
-        <%= link_to "Make Private", toggle_status_room_path(status: :restricted) %>
-      </li>
-      <li class="list-group-item">
-        <%= link_to "Claim Room", claim_room_path %>
-      </li>
-      <li class="list-group-item">
-        <%= link_to "Add Password", edit_room_path %>
-      </li>
-      <li class="list-group-item">
-        click to copy
-        <input class="form-control" id="copyRoomName" type="text" value='<%= "#{request.base_url}/rooms/#{@room.slug}" %>' />
-      </li>
-      <li class="list-group-item">
-        <%= @room.inspect %>
-      </li>
-    </ul>
+    <div class="col-md-12">
+      <div class="input-group">
+        <input
+          type="text"
+          id="copy-room-name"
+          class="form-control"
+          value='<%= "#{request.base_url}/rooms/#{@room.slug}" %>'
+        >
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" id="copy-button">Click to Copy</button>
+        </span>
+      </div>
+    </div>
   </div>
 
   <div class="row">
-    <span id="room-name" data-room='<%= @room.slug %>'></span>
-    <span id="currentUser" data-email='<%= @user.email %>'></span>
-
-    <div id="remoteViewContainer"></div>
-
-
-    <div id="localViewContainer">
-      <video id="selfView" autoplay></video>
-    </div>
-
-
-    <div id="join-btn-container">
-      <button onclick="handleJoinSession()" class="btn btn-success">
-        Join Room
-      </button>
-    </div>
-
-    <div id="leave-btn-container">
-      <button onclick="handleLeaveSession()" class="btn btn-danger">
-        Leave Room
-      </button>
+    <div class="col-md-12">
+      <ul class="list-group">
+        <li class="list-group-item">
+          TODO: do something about these links and their visibility
+        </li>
+        <li class="list-group-item">
+          <%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to "Make Public", toggle_status_room_path(status: :unrestricted) %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to "Claim Room", claim_room_path %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to "Add Password", edit_room_path %>
+        </li>
+        <li class="list-group-item">
+          <%= @room.inspect %>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
 
+  <div class="row">
+    <div class="col-md-12">
+      <span id="room-name" data-room='<%= @room.slug %>'></span>
+      <span id="currentUser" data-email='<%= @user.email %>'></span>
+
+      <div id="remoteViewContainer"></div>
+
+
+      <div id="localViewContainer">
+        <video id="selfView" autoplay></video>
+      </div>
+
+
+      <div id="join-btn-container">
+        <button onclick="handleJoinSession()" class="btn btn-success">
+          Join Room
+        </button>
+      </div>
+
+      <div id="leave-btn-container">
+        <button onclick="handleLeaveSession()" class="btn btn-danger">
+          Leave Room
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
 <% content_for :page_js do %>
   <script type="text/javascript">
     <%= render file: "#{Rails.root}/app/views/rooms/js/webrtc.js" %>

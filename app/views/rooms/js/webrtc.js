@@ -1,8 +1,8 @@
-document.getElementById("copyRoomName").addEventListener("click", function(e) {
+document.getElementById("copy-button").addEventListener("click", function(e) {
   e.preventDefault();
 
   var copied;
-  document.getElementById("copyRoomName").select();
+  document.getElementById("copy-room-name").select();
 
   try {
     copied = document.execCommand("copy");
@@ -11,7 +11,7 @@ document.getElementById("copyRoomName").addEventListener("click", function(e) {
   }
 
   if (copied) {
-    console.log("successfully copied!");
+    document.getElementById("copy-button").innerHTML = "Saved to Clipboard!"
   }
 });
 

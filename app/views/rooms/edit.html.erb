@@ -8,10 +8,3 @@
   <%= f.password_field :password, class: "form-control" %>
   <%= f.submit 'Edit Password', class: "btn btn-salmon" %>
 <% end %>
-
-<hr>
-
-<%= form_for @room do |f| %>
-  <%= f.hidden_field :password, value: "" %>
-  <%= f.submit 'Remove Password' %>
-<% end %>

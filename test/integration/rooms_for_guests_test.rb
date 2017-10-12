@@ -36,7 +36,10 @@ class RoomsForGuestsTest < ActionDispatch::IntegrationTest
 
     get claim_room_path
     follow_redirect!
-    assert_select 'div#flash-message', 'Invite by sharing this link: http://www.example.com/rooms/my-room'
+
+    room = Room.find_by_slug('my-room')
+    user = User.find_by_email('jerry@rails.com')
+    assert_equal room.user, user
   end
 
   test 'cannot password protect a room' do
