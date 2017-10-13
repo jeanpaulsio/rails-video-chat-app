@@ -30,23 +30,37 @@
         </button>
       </div>
 
-      <!-- TODO: do something about these links and their visibility -->
+      <!-- TODO: REFACTOR YUCKY VIEW LOGIC EW -->
       <ul class="list-group">
-        <li class="list-group-item">
-          <%= link_to "Register To Claim Room", new_user_registration_path(room: @room.name) %>
-        </li>
-        <li class="list-group-item">
-          <%= link_to "Make Room Public", toggle_status_room_path(status: :unrestricted) %>
-        </li>
-        <li class="list-group-item">
-          <%= link_to "Claim Room", claim_room_path %>
-        </li>
-        <li class="list-group-item">
-          <%= link_to "Add Password", edit_room_path %>
-        </li>
-        <li class="list-group-item">
-          <%= @room.inspect %>
-        </li>
+        <% if @room.user.nil? && (current_user.is_a? GuestUser) %>
+          <li class="list-group-item">
+            <%= link_to "Register To Claim Room",
+                new_user_registration_path(room: @room.name)
+                %>
+          </li>
+        <% end %>
+
+        <% if @room.user.nil? && !(current_user.is_a? GuestUser) %>
+          <li class="list-group-item">
+            <%= link_to "Claim Room", claim_room_path %>
+          </li>
+        <% end %>
+
+        <% if @room.user == current_user %>
+          <% if @room.restricted? %>
+            <li class="list-group-item">
+              <%= link_to "Make Room Public", toggle_status_room_path(status: :unrestricted) %>
+            </li>
+          <% end %>
+
+          <li class="list-group-item">
+            <%= link_to "Room Settings", edit_room_path %>
+          </li>
+
+          <li class="list-group-item">
+            <%= @room.inspect %>
+          </li>
+        <% end %>
       </ul>
     </div>
 

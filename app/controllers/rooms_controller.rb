@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
+    @room = Room.new(room_create_params)
 
     if @room.save
       flash[:success] = 'Invite by sharing this link: ' \
@@ -50,7 +50,7 @@ class RoomsController < ApplicationController
   end
 
   def update
-    if @room.update_attributes(room_params)
+    if @room.update_attributes(room_update_params)
       flash[:success] = 'You added a password to this room'
     else
       flash[:notice] = 'Something went wrong'
@@ -63,6 +63,10 @@ class RoomsController < ApplicationController
     ask_for_password(@room, params[:password]) unless
       @room.password.nil? ||
       @room.user == current_user
+
+    if @room.password
+      flash.now[:notice] = 'This is a password protected room'
+    end
 
     return if Rails.env == 'test'
     XirsysCredentialsJob.perform_later(@room.slug)
@@ -103,8 +107,12 @@ class RoomsController < ApplicationController
     @room = Room.friendly.find(params[:id])
   end
 
-  def room_params
+  def room_create_params
     params.require(:room).permit(:name, :user_id, :password)
+  end
+
+  def room_update_params
+    params.require(:room).permit(:password)
   end
 
   def ask_for_password(room, password = nil)

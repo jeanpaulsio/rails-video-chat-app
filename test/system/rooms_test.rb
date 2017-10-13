@@ -37,7 +37,7 @@ class RoomsTest < ApplicationSystemTestCase
 
   test 'can enter an existing room from anywhere' do
     visit room_path(@jerrys_room)
-    assert_text 'Unrestricted Room'
+    assert_text 'Join Room'
   end
 
   test 'friendly message when entering a non existent room' do

@@ -1,10 +1,23 @@
-<h1>Create a Room Password</h1>
+<div class="container h-75 w-100">
+  <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-lg-6 text-center">
+        <h1>Room Settings</h1>
+        <div class="card mt-3 mb-3 p-5">
+          <div class="card-block">
+            <!-- TODO: Refactor this into its own form -->
+            <!-- TODO: Give users the ability to join a room here too -->
+            <%= form_for @room do |f| %>
+              <div class="form-group">
+                <h2 class="text-secondary">Password</h2>
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
 
-<%= form_for @room do |f| %>
-  <%= f.label :name, "Room Name" %>
-  <%= f.text_field :name, class: "form-control" %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password, class: "form-control" %>
-  <%= f.submit 'Edit Password', class: "btn btn-salmon" %>
-<% end %>
+              <div class="form-group">
+                <%= f.submit 'Update Room Settings', class: "btn btn-salmon btn-block" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
