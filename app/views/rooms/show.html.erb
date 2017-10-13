@@ -1,6 +1,6 @@
 <!-- TODO styling here needs some TLC as well -->
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center mb-3">
     <div class="col-md-12">
       <div class="input-group">
         <input
@@ -17,16 +17,26 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3">
+      <div id="join-btn-container">
+        <button onclick="handleJoinSession()" class="btn btn-salmon btn-block">
+          Join Room
+        </button>
+      </div>
+
+      <div id="leave-btn-container">
+        <button onclick="handleLeaveSession()" class="btn btn-secondary btn-block">
+          Leave Room
+        </button>
+      </div>
+
+      <!-- TODO: do something about these links and their visibility -->
       <ul class="list-group">
         <li class="list-group-item">
-          TODO: do something about these links and their visibility
+          <%= link_to "Register To Claim Room", new_user_registration_path(room: @room.name) %>
         </li>
         <li class="list-group-item">
-          <%= link_to "Register Now To Claim Room", new_user_registration_path(room: @room.name) %>
-        </li>
-        <li class="list-group-item">
-          <%= link_to "Make Public", toggle_status_room_path(status: :unrestricted) %>
+          <%= link_to "Make Room Public", toggle_status_room_path(status: :unrestricted) %>
         </li>
         <li class="list-group-item">
           <%= link_to "Claim Room", claim_room_path %>
@@ -39,10 +49,8 @@
         </li>
       </ul>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-9">
       <span id="room-name" data-room='<%= @room.slug %>'></span>
       <span id="currentUser" data-email='<%= @user.email %>'></span>
 
@@ -52,22 +60,8 @@
       <div id="localViewContainer">
         <video id="selfView" autoplay></video>
       </div>
-
-
-      <div id="join-btn-container">
-        <button onclick="handleJoinSession()" class="btn btn-success">
-          Join Room
-        </button>
-      </div>
-
-      <div id="leave-btn-container">
-        <button onclick="handleLeaveSession()" class="btn btn-danger">
-          Leave Room
-        </button>
-      </div>
     </div>
   </div>
-
 
 </div>
 <% content_for :page_js do %>
