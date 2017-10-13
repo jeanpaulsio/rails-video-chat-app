@@ -15,6 +15,7 @@
 - [ ] Create API + API tests
 - [ ] Error handling for non-existent pages (web + api level)
 - [ ] Handle web rtc connection when one peer closes browser
+- [ ] **Warn users on iOS mobile devices that this app won't work. React-native app coming soon** (also, app doesn't work the greatest in firefox. oof)
 
 ## As a user, I can...
 
