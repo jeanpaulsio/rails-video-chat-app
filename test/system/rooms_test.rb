@@ -11,7 +11,7 @@ class RoomsTest < ApplicationSystemTestCase
 
     fill_in 'Room Name', with: 'Room 1'
     click_on 'Create New Room'
-    assert_text 'Invite by sharing this link:'
+    assert_text 'Join Room'
   end
 
   test 'claiming a room by registering' do

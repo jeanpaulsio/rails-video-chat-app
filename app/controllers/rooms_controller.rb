@@ -33,8 +33,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_create_params)
 
     if @room.save
-      flash[:success] = 'Invite by sharing this link: ' \
-                        "#{request.base_url}/rooms/#{@room.slug}"
+      flash[:success] = 'You created a room!'
       redirect_to @room
     else
       flash[:notice] = 'Sorry, that room is taken!'
