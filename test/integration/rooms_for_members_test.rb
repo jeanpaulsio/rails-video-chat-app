@@ -12,37 +12,17 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot claim another user\'s room' do
-    get room_path(@kramers_room)
-    assert_template 'rooms/authenticate'
-
-    post authenticate_room_path, params: { password: 'foobar' }
-    follow_redirect!
-    assert_template 'rooms/show'
-
-    get claim_room_path
-    follow_redirect!
-    assert_select 'div#flash-message', 'You are not allowed to do that!'
+    get claim_room_path(@kramers_room)
+    refute_equal @kramers_room.user, @jerry
   end
 
   test 'cannot toggle room status of another user\'s room' do
-    get room_path(@kramers_room)
-    assert_template 'rooms/authenticate'
-
-    post authenticate_room_path, params: { password: 'foobar' }
-    follow_redirect!
-    assert_template 'rooms/show'
-
-    get toggle_status_room_path(status: :unrestricted)
-    follow_redirect!
-    assert_select 'div#flash-message', 'You are not allowed to do that!'
+    get toggle_status_room_path(@kramers_room, status: :unrestricted)
+    assert_equal @kramers_room.status, 'restricted'
   end
 
   test 'cannot set a room to private using #toggle_status' do
-    get room_path(@jerrys_room)
-    assert_template 'rooms/show'
-
-    get toggle_status_room_path(status: :restricted)
-    follow_redirect!
+    get toggle_status_room_path(@jerrys_room, status: :restricted)
     assert_equal @jerrys_room.status, 'unrestricted'
   end
 
@@ -53,9 +33,6 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
     assert_difference 'Room.count', 1 do
       post rooms_path, params: { room: { name: 'jerrys room' } }
     end
-
-    follow_redirect!
-    assert_template 'rooms/show'
   end
 
   test 'can create a room with a password' do
@@ -100,15 +77,11 @@ class RoomsForMembersTest < ActionDispatch::IntegrationTest
     log_out
     log_in_as(@kramer)
 
-    get room_path(@kramers_room)
-    assert_template 'rooms/show'
-
     password = @kramers_room.password
     assert_equal @kramers_room.status, 'restricted'
     assert_equal @kramers_room.check_hashed_password(password), 'foobar'
 
-    get toggle_status_room_path(status: :unrestricted)
-    follow_redirect!
+    get toggle_status_room_path(@kramers_room, status: :unrestricted)
 
     @kramers_room.reload
     assert_equal @kramers_room.status, 'unrestricted'

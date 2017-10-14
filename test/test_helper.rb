@@ -3,12 +3,10 @@ require 'rails/test_help'
 require 'minitest/reporters'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new(color: true)
 
-# :nodoc:
 class ActiveSupport::TestCase
   fixtures :all
 end
 
-# Helper Methods For Integration Tests
 class ActionDispatch::IntegrationTest
   def sign_up_as(args)
     get new_user_registration_path

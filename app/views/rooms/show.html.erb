@@ -30,32 +30,12 @@
         </button>
       </div>
 
-      <!-- TODO: REFACTOR YUCKY VIEW LOGIC EW -->
       <ul class="list-group">
-        <% if @room.user.nil? && (current_user.is_a? GuestUser) %>
-          <li class="list-group-item">
-            <%= link_to "Register To Claim Room",
-                new_user_registration_path(room: @room.name)
-                %>
-          </li>
-        <% end %>
-
-        <% if @room.user.nil? && !(current_user.is_a? GuestUser) %>
-          <li class="list-group-item">
-            <%= link_to "Claim Room", claim_room_path %>
-          </li>
-        <% end %>
-
-        <% if @room.user == current_user %>
-          <% if @room.restricted? %>
-            <li class="list-group-item">
-              <%= link_to "Make Room Public", toggle_status_room_path(status: :unrestricted) %>
-            </li>
-          <% end %>
-
-          <li class="list-group-item">
-            <%= link_to "Room Settings", edit_room_path %>
-          </li>
+        <% present @room do |room_presenter| %>
+          <%= room_presenter.register_link(current_user) %>
+          <%= room_presenter.claim_room_link(current_user) %>
+          <%= room_presenter.toggle_status_link(current_user) %>
+          <%= room_presenter.room_settings_link(current_user) %>
         <% end %>
       </ul>
     </div>
