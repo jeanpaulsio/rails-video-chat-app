@@ -4,18 +4,7 @@
         <h1>Room Settings</h1>
         <div class="card mt-3 mb-3 p-5">
           <div class="card-block">
-            <!-- TODO: Refactor this into its own form -->
-            <!-- TODO: Give users the ability to join a room here too -->
-            <%= form_for @room do |f| %>
-              <div class="form-group">
-                <h2 class="text-secondary">Password</h2>
-                <%= f.password_field :password, class: "form-control" %>
-              </div>
-
-              <div class="form-group">
-                <%= f.submit 'Update Room Settings', class: "btn btn-salmon btn-block" %>
-              </div>
-            <% end %>
+            <%= render 'form' %>
           </div>
         </div>
       </div>

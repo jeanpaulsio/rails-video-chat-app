@@ -1,0 +1,19 @@
+<%= form_for @room do |f| %>
+  <% unless @room.name %>
+    <div class="form-group">
+      <h2 class="text-secondary">Room Name</h2>
+      <%= f.text_field :name, class: "form-control", required: true %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <h2 class="text-secondary">Room Password <small><em>optional</em></small></h2>
+    <%= f.text_field :password, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="form-group">
+    <%= f.submit 'Save', class: "btn btn-salmon btn-block" %>
+  </div>
+<% end %>

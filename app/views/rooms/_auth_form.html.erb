@@ -1,0 +1,10 @@
+<%= form_tag authenticate_room_path do %>
+  <div class="form-group">
+    <h2 class="text-secondary">Password</h2>
+    <%= password_field_tag :password, nil, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit_tag "Enter Room", class: "btn btn-salmon btn-block" %>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
-<!-- TODO styling here needs some TLC as well -->
 <div class="container">
+
   <div class="row justify-content-center mb-3">
     <div class="col-md-12">
       <div class="input-group">
@@ -43,9 +43,7 @@
     <div class="col-md-9">
       <span id="room-name" data-room='<%= @room.slug %>'></span>
       <span id="currentUser" data-email='<%= @user.email %>'></span>
-
       <div id="remoteViewContainer"></div>
-
 
       <div id="localViewContainer">
         <video id="selfView" autoplay></video>
@@ -54,6 +52,7 @@
   </div>
 
 </div>
+
 <% content_for :page_js do %>
   <script type="text/javascript">
     <%= render file: "#{Rails.root}/app/views/rooms/js/webrtc.js" %>

@@ -1,19 +1,14 @@
-<!-- TODO Styling could use some TLC -->
 <div class="container">
   <div class="row h-100 justify-content-center">
-      <div class="col-lg-6 text-center">
+    <div class="col-lg-6 text-center">
+      <h1>Your Rooms</h1>
 
-        <h1>Your Rooms</h1>
+      <ul class="list-group mb-3">
+        <%= render @rooms %>
+      </ul>
 
-        <ul class="list-group mb-3">
-          <% @rooms.each do |room| %>
-            <li class="list-group-item"><%= link_to room.name, room %></li>
-          <% end %>
-        </ul>
-
-        <%= link_to "Create a Room", new_room_path, class: "btn btn-salmon" %>
-
-      </div>
+      <%= link_to "Create a Room", new_room_path, class: "btn btn-salmon" %>
+    </div>
   </div>
 </div>
 

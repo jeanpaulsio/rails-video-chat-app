@@ -4,18 +4,7 @@
         <h1>Enter Room Password</h1>
         <div class="card mt-3 mb-3 p-5">
           <div class="card-block">
-            <!-- TODO: Refactor this into its own form -->
-            <!-- TODO: Give users the ability to join a room here too -->
-            <%= form_tag authenticate_room_path do %>
-              <div class="form-group">
-                <h2 class="text-secondary">Password</h2>
-                <%= password_field_tag :password, nil, class: "form-control" %>
-              </div>
-
-              <div class="form-group">
-                <%= submit_tag "Enter Room", class: "btn btn-salmon btn-block" %>
-              </div>
-            <% end %>
+            <%= render 'auth_form' %>
           </div>
         </div>
       </div>
