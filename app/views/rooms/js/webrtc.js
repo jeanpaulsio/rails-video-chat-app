@@ -29,7 +29,7 @@ const leaveBtnContainer = document.getElementById("leave-btn-container");
 
 // Configuration
 let roomName = document.getElementById("room-name").dataset.room;
-let constraints = { audio: true, video: true };
+let constraints = { audio: false, video: true };
 let xirsysIceCreds;
 
 // Global Objects
