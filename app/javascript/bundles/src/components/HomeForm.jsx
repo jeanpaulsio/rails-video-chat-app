@@ -37,12 +37,14 @@ class HomeForm extends Component {
     this.setState({ willCreateRoom: !this.state.willCreateRoom });
 
   createSlug = () => {
-    const regexSpaces = /\s/g
+    const regexSpaces = /\s/g;
+    const regexChars = /\W/g;
     let { roomName } = this.state;
-    let slug = roomName.replace(regexSpaces, '-')
+    let slug = roomName.replace(regexSpaces, "-");
+    slug = slug.replace(regexChars, "-");
 
-    return slug
-  }
+    return slug;
+  };
 
   render() {
     const { willCreateRoom } = this.state;
