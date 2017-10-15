@@ -29,7 +29,7 @@ class HomeForm extends Component {
           this.setState({ errorMessage: "Oops! Something went wrong." })
         );
     } else {
-      window.location = `/rooms/${this.state.roomName}`;
+      window.location = `/rooms/${this.createSlug()}`;
     }
   };
 
