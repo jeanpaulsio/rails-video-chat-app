@@ -4,7 +4,6 @@ require 'test_helper'
 class RoomsForGuestsTest < ActionDispatch::IntegrationTest
   def setup
     get root_url
-    assert_select 'input#room_name'
 
     assert_difference 'Room.count', 1 do
       post rooms_path, params: { room: { name: 'my room' } }

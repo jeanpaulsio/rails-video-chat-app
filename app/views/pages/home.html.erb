@@ -1,44 +1,10 @@
-<%= react_component("Pong", props: @hello_world_props, prerender: false) %>
 
 <div class="container h-75 w-100">
   <div class="row h-100 justify-content-center align-items-center">
       <div class="col-lg-6 text-center">
         <%= image_tag("logo.svg",size: "50", alt: "WebRTC on Rails", class: "img-fluid m-2") %>
         <h1>WebRTC on Rails</h1>
-        <div class="card mt-3 mb-3 p-5">
-          <div class="card-block">
-            <div id="createRoomForm">
-              <%= render "form", room: @room %>
-
-              <button class="mt-3 btn btn-link btn-block" onclick="toggleForm()">
-                Already know where you're going?
-              </button>
-            </div>
-
-            <div id="goToRoomForm">
-              <div class="form-group">
-                <h2 class="text-secondary">Enter a Room Name</h2>
-                <input id="roomName" type="text" class="form-control bg-light" required="true">
-              </div>
-
-              <div class="form-group">
-                <button onclick="joinRoom()" class="btn btn-salmon btn-block">
-                  Join Room
-                </button>
-              </div>
-
-              <button class="mt-3 btn btn-link btn-block" onclick="toggleForm()">
-                Need to Create a Room?
-              </button>
-            </div>
-          </div>
-        </div>
+        <%= react_component "HomeForm" %>
       </div>
   </div>
 </div>
-
-<% content_for :page_js do %>
-  <script type="text/javascript">
-    <%= render file: "#{Rails.root}/app/views/pages/js/home.js" %>
-  </script>
-<% end %>

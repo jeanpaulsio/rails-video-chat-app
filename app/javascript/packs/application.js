@@ -2,8 +2,8 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import ReactOnRails from "react-on-rails";
-import Pong from "../bundles/src/components/Pong";
+import HomeForm from "../bundles/src/components/HomeForm";
 
 ReactOnRails.register({
-  Pong
+  HomeForm
 });

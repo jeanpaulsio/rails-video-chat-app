@@ -14,7 +14,7 @@ class RoomPresenter
   def register_link(current_user)
     return unless @room.user.nil? && (current_user.is_a? GuestUser)
 
-    wrap_list h.link_to('Register',
+    wrap_list h.link_to('Register to Claim',
                         new_user_registration_path(name: @room.name))
   end
 

@@ -29,15 +29,26 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
+  # TODO refactor this into an API controller
   def create
     @room = Room.new(room_create_params)
 
-    if @room.save
-      flash[:success] = 'You created a room!'
-      redirect_to @room
-    else
-      flash[:notice] = 'Sorry, that room is taken!'
-      redirect_to root_path
+    respond_to do |format|
+      if @room.save
+        format.html do
+          flash[:success] = 'You created a room!'
+          redirect_to @room
+        end
+
+        format.json { render :show, status: :created, location: @room }
+      else
+        format.html do
+          flash[:notice] = 'Sorry, that room is taken!'
+          redirect_to root_path
+        end
+
+        format.json { render json: @room.errors, status: :unprocessable_entity }
+      end
     end
   end
 
